@@ -1,24 +1,32 @@
 list = []
+sum=0
 
+# 입력받아서 리스트 정렬
 for i in range(0, 9):
   num = int(input())
   if num <= 100:
     list.append(num)
+    sum +=num
 list.sort()
 
-print(list)
+sum = sum-100
+exc = 0
 
-sum=0
+# 두 난쟁이 찾아내기
+while exc==0:
+  for i in range(0,8):
+    exc += list[i]
+    for j in range(1,9):
+      exc += list[j]
 
-while sum<100:
-  for i in range(0, 8):
-    list.remove(i)
-    for j in range(0,8):
-      list.remove(j)
-      for k in range(0,7):
-        sum += list[k]
-
-print(sum)        
-    
+      if exc == sum: # 찾아냄
+        del list[j]
+        del list[i]
+        for k in range(0, len(list)):
+          print(list[k])
+        exit()
+        
+      exc -= list[j]
+    exc -= list[i]
 
 
